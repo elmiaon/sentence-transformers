@@ -20,6 +20,7 @@ import math
 import queue
 import tempfile
 from distutils.dir_util import copy_tree
+import wandb
 
 from . import __MODEL_HUB_ORGANIZATION__
 from .evaluation import SentenceEvaluator
