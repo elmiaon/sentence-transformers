@@ -714,6 +714,7 @@ class SentenceTransformer(nn.Sequential):
                         torch.nn.utils.clip_grad_norm_(loss_model.parameters(), max_grad_norm)
                         optimizer.step()
 
+                    wandb.log({"loss": loss_value})
                     optimizer.zero_grad()
 
                     if not skip_scheduler:
@@ -766,6 +767,7 @@ class SentenceTransformer(nn.Sequential):
 
         if evaluator is not None:
             score = evaluator(self, output_path=eval_path, epoch=epoch, steps=steps)
+            wandb.log({"score": score})
             if callback is not None:
                 callback(score, epoch, steps)
             if score > self.best_score:
